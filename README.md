@@ -96,7 +96,7 @@ Done!
 ***Replace all labels with `foo` and `bar` for all repositories of user `cbrgm` already having a topic `foo`***
 
 ```bash
-topictool add "user:cbrgm topic:foo" "foo" "bar"
+topictool replace "user:cbrgm topic:foo" "foo" "bar"
 ```
 
 ```bash
