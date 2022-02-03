@@ -54,7 +54,10 @@ func (t *TopicTool) ReplaceTopics(query string, topics []string) error {
 
 func (t *TopicTool) replaceTopics(repositories []*github.Repository, topics []string) error {
 	for _, repo := range repositories {
-		return t.setRepositoryTopics(repo, topics)
+		err := t.setRepositoryTopics(repo, topics)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -87,7 +90,10 @@ func (t *TopicTool) AddTopics(query string, topics []string) error {
 func (t *TopicTool) addTopics(repositories []*github.Repository, topicsToAppend []string) error {
 	for _, repo := range repositories {
 		repo.Topics = append(repo.Topics, topicsToAppend...)
-		return t.setRepositoryTopics(repo, repo.Topics)
+		err := t.setRepositoryTopics(repo, repo.Topics)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -120,7 +126,10 @@ func (t *TopicTool) RemoveTopics(query string, topics []string) error {
 func (t *TopicTool) removeTopics(repositories []*github.Repository, topicsToRemove []string) error {
 	for _, repo := range repositories {
 		repo.Topics = removeFromTopics(repo.Topics, topicsToRemove)
-		return t.setRepositoryTopics(repo, repo.Topics)
+		err := t.setRepositoryTopics(repo, repo.Topics)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
